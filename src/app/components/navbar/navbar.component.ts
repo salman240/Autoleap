@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  title: string = "";
+  description: string = "";
+  modalRef: NgbModalRef;
+
+  constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+  }
+
+  openModal(ref: NgbModalRef) {
+    this.modalRef = this.modalService.open(ref, {});
+  }
+
+  saveTodo() {
+    console.log(this.title);
+    console.log(this.description);
+
+    this.modalRef.close();
   }
 
 }

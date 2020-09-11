@@ -8,6 +8,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
@@ -19,6 +21,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ParentComponent } from './components/parent/parent.component';
 
 import { fakeBackendProvider } from './services/fake-backend.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,6 @@ import { fakeBackendProvider } from './services/fake-backend.service';
     LoginComponent,
     ResetPasswordComponent,
     ParentComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -42,6 +44,9 @@ import { fakeBackendProvider } from './services/fake-backend.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
+    NgbModule,
+    FormsModule
   ],
   providers: [
     fakeBackendProvider
