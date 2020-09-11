@@ -1,1 +1,37 @@
-<p>register works!</p>
+<form
+  class="d-flex flex-column vh-100 vw-100 justify-content-center align-items-center"
+>
+  <mat-card class="d-flex flex-column w-25">
+    <h2 class="text-center">Register</h2>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput type="password" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" />
+    </mat-form-field>
+
+    <button
+      class="w-25 m-auto"
+      mat-raised-button
+      color="primary"
+      routerLink="/dashboard"
+    >
+      Submit
+    </button>
+
+    <a class="mt-2" mat-button routerLink="login">Go to login</a>
+  </mat-card>
+</form>
