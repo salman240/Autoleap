@@ -4,6 +4,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { TodoContainerComponent } from './components/todo-container/todo-container.component';
+import { ParentComponent } from './components/parent/parent.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    component: TodoContainerComponent
+    component: ParentComponent
   },
 ];
 
