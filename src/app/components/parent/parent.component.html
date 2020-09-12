@@ -1,4 +1,4 @@
-<app-navbar (onOpenModal)="openModal(addTodo)"></app-navbar>
+<app-navbar (onOpenModal)="openModal(addTodo)" [todoLength]="todos?.length"></app-navbar>
 <app-todo-container [todos]="todos" (onEditModal)="openModal(editTodo, $event, true)"
     (onDeleteModal)="openModal(deleteTodo, $event)">
 </app-todo-container>

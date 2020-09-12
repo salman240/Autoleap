@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { TodoContainerComponent } from './components/todo-container/todo-container.component';
 import { ParentComponent } from './components/parent/parent.component';
 
 

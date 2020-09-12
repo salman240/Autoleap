@@ -1,4 +1,4 @@
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Input } from '@angular/core';
 import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -7,6 +7,7 @@ import { Component, OnInit, Output } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Input() todoLength: number;
   @Output() onOpenModal: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
