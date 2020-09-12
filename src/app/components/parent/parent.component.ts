@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ITodo } from 'src/app/models/ITodo';
 import { ApiService } from 'src/app/services/api.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { ITodo } from 'src/app/models/ITodo';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-parent',
@@ -9,8 +11,12 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ParentComponent implements OnInit {
   todos: ITodo[] = [];
+  title: string = "";
+  description: string = "";
+  modalRef: NgbModalRef;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.apiService.getTodos().subscribe((data: ITodo[]) => {
@@ -21,9 +27,32 @@ export class ParentComponent implements OnInit {
     });
   }
 
-  addTodo(event) {
+  openModal(ref: NgbModalRef) {
+    this.modalRef = this.modalService.open(ref, { centered: true });
+  }
+
+
+  saveTodo() {
+    this.modalRef.close();
+
+    const todo: ITodo = {
+      id: uuidv4(),
+      title: this.title,
+      description: this.description,
+      completed: false,
+    }
+    this.todos.push(todo);
+    this.title = "";
+    this.description = "";
+
+    // saving todo to storage via fake backend
+    this.apiService.saveTodo(todo).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.error(error);
+    });
+
     console.log(this.todos);
-    this.todos.push(event);
     console.log(event);
     console.log(this.todos);
   }

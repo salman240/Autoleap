@@ -2,24 +2,6 @@
     <mat-toolbar color="primary">
         <span>Auto Lead</span>
         <span class="spacer"></span>
-        <button mat-button (click)="openModal(addTodo)">Add Todo</button>
+        <button mat-button (click)="openTodoModal()">Add Todo</button>
     </mat-toolbar>
 </p>
-
-<ng-template #addTodo let-c="close" let-d="dismiss">
-    <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Add Note</h4>
-    </div>
-    <div class="modal-body">
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <input class="form-control mb-3" type="text" [(ngModel)]="title" placeholder="Title..." />
-            <textarea class="form-control" [(ngModel)]="description" name="description" placeholder="Description..."
-                rows="3"></textarea>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="saveTodo()">
-            Save
-        </button>
-    </div>
-</ng-template>
