@@ -17,7 +17,7 @@ export class ParentComponent implements OnInit {
   description: string = "";
   checked: boolean = false;
 
-  modalRef: NgbModalRef;
+  modalRef: any;
 
   constructor(private apiService: ApiService,
     private modalService: NgbModal) { }
