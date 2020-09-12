@@ -4,7 +4,8 @@
     <div class="col-md-12">
         <div class="row" *ngIf="todos?.length > 0">
             <div class="col-md-4 mb-3" *ngFor="let todo of todos">
-                <app-todo [todo]="todo"></app-todo>
+                <app-todo [todo]="todo" (onEditModal)="openEditModal($event)" (onDeleteModal)="openDeleteModal($event)">
+                </app-todo>
             </div>
         </div>
     </div>

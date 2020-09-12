@@ -14,16 +14,20 @@ export class ApiService {
     return this.httpClient.get(apiUrls.GET_TODOS_URL);
   }
 
-  getTodo() {
-
+  getTodo(id) {
+    return this.httpClient.get(apiUrls.GET_TODO_URL, {
+      params: {
+        id
+      }
+    });
   }
 
   saveTodo(todo: ITodo) {
     return this.httpClient.post(apiUrls.SAVE_TODO_URL, todo);
   }
 
-  updateTodo() {
-
+  updateTodo(todo: ITodo) {
+    return this.httpClient.put(apiUrls.UPDATE_TODO_URL, todo);
   }
 
   deleteTodo() {

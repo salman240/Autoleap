@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ITodo } from 'src/app/models/ITodo';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -9,6 +9,8 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class TodoContainerComponent implements OnInit {
   @Input() todos: ITodo[];
+  @Output() onEditModal: EventEmitter<string> = new EventEmitter();
+  @Output() onDeleteModal: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
@@ -16,4 +18,12 @@ export class TodoContainerComponent implements OnInit {
     console.log(this.todos);
   }
 
+  openEditModal(id) {
+    this.onEditModal.emit(id);
+
+  }
+
+  openDeleteModal(id) {
+    this.onDeleteModal.emit(id);
+  }
 }

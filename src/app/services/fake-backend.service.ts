@@ -23,7 +23,7 @@ export class FakeBackendService implements HttpInterceptor {
       switch (true) {
         case url.endsWith('/api/todos') && method === 'GET':
           return getTodos();
-        case url.includes('/api/todo?') && method === 'GET':
+        case url.includes('/api/todo') && method === 'GET':
           return getTodo();
         case url.endsWith('/api/todos') && method === 'POST':
           return addTodo();
@@ -44,8 +44,13 @@ export class FakeBackendService implements HttpInterceptor {
     }
 
     function getTodo() {
+      let id = request.params.get('id');
+      let todo = todos.find((todo: ITodo) =>
+        todo.id == id
+      );
+
       return ok(
-        todos
+        todo
       );
     }
 
@@ -60,6 +65,18 @@ export class FakeBackendService implements HttpInterceptor {
     }
 
     function updateTodo() {
+      const id = body.id;
+      let todo = todos.find((todo: ITodo) =>
+        todo.id == id
+      );
+
+      // updating todos from body payload
+      todo.title = body.title;
+      todo.description = body.description;
+      todo.completed = body.completed;
+
+      localStorage.setItem('todos', JSON.stringify(todos));
+
       return ok(
         todos
       );

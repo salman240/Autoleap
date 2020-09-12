@@ -13,7 +13,10 @@ export class ParentComponent implements OnInit {
   todos: ITodo[] = [];
   title: string = "";
   description: string = "";
+  checked: boolean = false;
+
   modalRef: NgbModalRef;
+  todoId: string;
 
   constructor(private apiService: ApiService,
     private modalService: NgbModal) { }
@@ -27,14 +30,18 @@ export class ParentComponent implements OnInit {
     });
   }
 
-  openModal(ref: NgbModalRef) {
+  openModal(ref: NgbModalRef, id?: string, isEdit?: boolean) {
+    this.todoId = id;
+    if (isEdit) {
+      this.getTodoById(id, ref);
+      return;
+    }
+
     this.modalRef = this.modalService.open(ref, { centered: true });
   }
 
 
   saveTodo() {
-    this.modalRef.close();
-
     const todo: ITodo = {
       id: uuidv4(),
       title: this.title,
@@ -42,6 +49,8 @@ export class ParentComponent implements OnInit {
       completed: false,
     }
     this.todos.push(todo);
+
+    // clearing modal inputs
     this.title = "";
     this.description = "";
 
@@ -52,8 +61,44 @@ export class ParentComponent implements OnInit {
       console.error(error);
     });
 
-    console.log(this.todos);
-    console.log(event);
+    this.modalRef.close();
     console.log(this.todos);
   }
+
+
+  updateTodo() {
+    let todo = this.todos.find((todo: ITodo) =>
+      todo.id == this.todoId
+    );
+    todo.title = this.title;
+    todo.description = this.description;
+    todo.completed = this.checked;
+
+    this.apiService.updateTodo(todo).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.error(error);
+    });
+
+    this.modalRef.close();
+  }
+
+
+  delTodo() {
+
+  }
+
+
+  getTodoById(id, ref) {
+    this.apiService.getTodo(id).subscribe((todo: ITodo) => {
+      this.title = todo.title;
+      this.description = todo.description;
+      this.checked = todo.completed;
+
+      this.modalRef = this.modalService.open(ref, { centered: true });
+    }, error => {
+      console.error(error);
+    });
+  }
+
 }
