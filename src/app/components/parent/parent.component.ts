@@ -11,15 +11,17 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class ParentComponent implements OnInit {
   todos: ITodo[] = [];
+  todoId: string;
+
   title: string = "";
   description: string = "";
   checked: boolean = false;
 
   modalRef: NgbModalRef;
-  todoId: string;
 
   constructor(private apiService: ApiService,
     private modalService: NgbModal) { }
+
 
   ngOnInit() {
     this.apiService.getTodos().subscribe((data: ITodo[]) => {
@@ -74,18 +76,33 @@ export class ParentComponent implements OnInit {
     todo.description = this.description;
     todo.completed = this.checked;
 
+    // update in localStorage via fake backend
     this.apiService.updateTodo(todo).subscribe(data => {
       console.log(data);
     }, error => {
       console.error(error);
     });
 
+    this.title = "";
+    this.description = "";
+    this.checked = false;
+
     this.modalRef.close();
   }
 
 
   delTodo() {
+    const todoIndex = this.todos.findIndex((todo: ITodo) => todo.id == this.todoId);
+    this.todos.splice(todoIndex, 1);
 
+    // clearing from localStorage via fake api service
+    this.apiService.deleteTodo(this.todoId).subscribe((data: ITodo) => {
+      console.log(data);
+    }, error => {
+      console.error(error);
+    });
+
+    this.modalRef.close();
   }
 
 

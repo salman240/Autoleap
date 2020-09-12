@@ -3,6 +3,7 @@
     (onDeleteModal)="openModal(deleteTodo, $event)">
 </app-todo-container>
 
+
 <!-- Add Todo Modal -->
 <ng-template #addTodo let-c="close" let-d="dismiss">
     <div class="modal-header">
@@ -53,7 +54,7 @@
         <h6>Are you sure you want to delete this note?</h6>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="delTodo()">
+        <button type="button" class="btn btn-danger" (click)="delTodo()">
             Delete
         </button>
     </div>

@@ -70,7 +70,7 @@ export class FakeBackendService implements HttpInterceptor {
         todo.id == id
       );
 
-      // updating todos from body payload
+      // updating todo from body payload
       todo.title = body.title;
       todo.description = body.description;
       todo.completed = body.completed;
@@ -83,25 +83,17 @@ export class FakeBackendService implements HttpInterceptor {
     }
 
     function deleteTodo() {
+      let id = request.params.get('id');
+      const todoIndex = todos.findIndex((todo: ITodo) => todo.id == id);
+      todos.splice(todoIndex, 1);
+      localStorage.setItem('todos', JSON.stringify(todos));
+
       return ok(
-        todos
+        {
+          status: "Success"
+        }
       );
     }
-
-    // function register() {
-    //   const user = body
-
-    //   if (todos.find(x => x.username === user.username)) {
-    //     return error('Username "' + user.username + '" is already taken')
-    //   }
-
-    //   user.id = todos.length ? Math.max(...todos.map(x => x.id)) + 1 : 1;
-    //   todos.push(user);
-    //   localStorage.setItem('users', JSON.stringify(todos));
-
-    //   return ok();
-    // }
-
 
 
     // helper functions

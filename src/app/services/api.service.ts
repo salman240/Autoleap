@@ -30,7 +30,11 @@ export class ApiService {
     return this.httpClient.put(apiUrls.UPDATE_TODO_URL, todo);
   }
 
-  deleteTodo() {
-
+  deleteTodo(id) {
+    return this.httpClient.delete(apiUrls.DELETE_TODO_URL, {
+      params: {
+        id
+      }
+    });
   }
 }
