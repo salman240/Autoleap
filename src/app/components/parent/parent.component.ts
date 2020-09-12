@@ -32,7 +32,7 @@ export class ParentComponent implements OnInit {
     });
   }
 
-  openModal(ref: NgbModalRef, id?: string, isEdit?: boolean) {
+  openModal(ref, id?: string, isEdit?: boolean) {
     this.todoId = id;
     if (isEdit) {
       this.getTodoById(id, ref);
