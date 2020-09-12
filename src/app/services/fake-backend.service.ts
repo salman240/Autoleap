@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
+import { ITodo } from '../models/ITodo';
 
 // array in local storage for todos
-let todos = JSON.parse(localStorage.getItem('todos')) || ['1', '2'];
+let todos: ITodo[] = JSON.parse(localStorage.getItem('todos')) || [];
 
 @Injectable()
 export class FakeBackendService implements HttpInterceptor {
@@ -15,7 +16,7 @@ export class FakeBackendService implements HttpInterceptor {
     return of(null)
       .pipe(mergeMap(handleRoute))
       .pipe(materialize())
-      .pipe(delay(2000))
+      .pipe(delay(1000))
       .pipe(dematerialize());
 
     function handleRoute() {
@@ -49,8 +50,12 @@ export class FakeBackendService implements HttpInterceptor {
     }
 
     function addTodo() {
+      const todo = body;
+      todos.push(todo);
+      localStorage.setItem('todos', JSON.stringify(todos));
+
       return ok(
-        todos
+        todo
       );
     }
 
@@ -66,19 +71,19 @@ export class FakeBackendService implements HttpInterceptor {
       );
     }
 
-    function register() {
-      const user = body
+    // function register() {
+    //   const user = body
 
-      if (todos.find(x => x.username === user.username)) {
-        return error('Username "' + user.username + '" is already taken')
-      }
+    //   if (todos.find(x => x.username === user.username)) {
+    //     return error('Username "' + user.username + '" is already taken')
+    //   }
 
-      user.id = todos.length ? Math.max(...todos.map(x => x.id)) + 1 : 1;
-      todos.push(user);
-      localStorage.setItem('users', JSON.stringify(todos));
+    //   user.id = todos.length ? Math.max(...todos.map(x => x.id)) + 1 : 1;
+    //   todos.push(user);
+    //   localStorage.setItem('users', JSON.stringify(todos));
 
-      return ok();
-    }
+    //   return ok();
+    // }
 
 
 

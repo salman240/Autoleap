@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ITodo } from 'src/app/models/ITodo';
 import { ApiService } from 'src/app/services/api.service';
 
 @Component({
@@ -7,15 +8,12 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./todo-container.component.css']
 })
 export class TodoContainerComponent implements OnInit {
+  @Input() todos: ITodo[];
 
-  constructor(private apiService: ApiService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.apiService.getTodos().subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.error(error);
-    });
+    console.log(this.todos);
   }
 
 }

@@ -1,2 +1,2 @@
-<app-navbar></app-navbar>
-<app-todo-container></app-todo-container>
+<app-navbar (addTodo)="addTodo($event)"></app-navbar>
+<app-todo-container [todos]="todos"></app-todo-container>
